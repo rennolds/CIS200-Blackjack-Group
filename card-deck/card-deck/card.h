@@ -2,6 +2,9 @@
 //makes a single card that can be used by deck class
 //collection of cards that can be shuffled
 
+//https://codereview.stackexchange.com/questions/41810/card-and-deck-classes
+//http://www.cplusplus.com/forum/general/163824/
+
 #pragma once
 #include <string>
 
