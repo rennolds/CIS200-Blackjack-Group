@@ -7,7 +7,9 @@ using namespace std;
 int main()
 {
 	
-	cout << "Blacjack Group 7 Represent" << endl;
+	cout << "Blackjack Group 7 Represent" << endl;
+
+
 
 
 	system("pause");
