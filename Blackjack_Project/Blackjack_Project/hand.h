@@ -14,7 +14,7 @@ using namespace std;
 class Hand
 {
 private:
-	static void setCardValues()
+	void setCardValues()
 	{
 		cardValues['A'] = 1;
 		cardValues['2'] = 2;
@@ -32,8 +32,8 @@ private:
 	}
 
 protected:
-	std::vector<Card> hand;					// hand of Cards
-	static std::map <char, int> cardValues;	// holds card values
+	vector<Card> hand;					// hand of Cards
+	map <char, int> cardValues;	// holds card values
 
 public:
 	Hand()
@@ -123,14 +123,11 @@ public:
 		return isItAce;
 	}
 
-	Card removeCard()
+	void removeCard() // used to be of type Card 
 	{
-		Card card;
-
-		card = hand.back();
+		// Card card;
 		hand.pop_back();
-
-		return card;
+		// return card;
 	}
 
 	bool hasBusted() const
@@ -179,6 +176,11 @@ public:
 		return outString;
 	}
 
+
+	int getHandSize()
+	{
+		return hand.size();
+	}
 
 	/*
 	//gives 2 cards to dealer and player

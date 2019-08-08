@@ -13,18 +13,17 @@ using namespace std;
 class Deck
 {
 private:
-	std::vector<Card> deck;
+	vector<Card> deck;
 	int numberOfDecks;
 	Card lastCardInDeck;
 
 
 public:
 	Deck()
-	{
-		shuffleDeck();
+	{	
 		numberOfDecks = 6;
 		deckBuilder(numberOfDecks);
-
+		shuffleDeck();
 	}
 	Deck(int deckNumber)
 	{
