@@ -35,8 +35,8 @@ public:
 		do 
 		{
 			round();
-			cout << "Press N to quit the game, press anything to go to the next round." << endl;
-			cin >> keepPlaying;
+			cout << "Press N to quit the game, press anything else to go to the next round." << endl;
+			cin >> keepPlaying; // CHECK IF ITS A CHARACTER
 
 		} while (!(keepPlaying == 'N'));
 	}
@@ -47,7 +47,7 @@ public:
 		for (int index = 0; index < players.size(); ++index) // write void playerBets()
 		{
 			cout << "How much would you player " << index + 1 << " like to bet?" << endl;
-			cin >> bet;
+			cin >> bet; // CHECK IF ITS A NUMBER
 			
 			players.at(index).setBet(bet);
 		}
@@ -75,7 +75,7 @@ public:
 
 			do 
 			{
-				cout << "What would player " << index + 1 << " like to do, hit (Enter: H) or stand (Enter: S)?" << endl;
+				cout << "What would player " << index + 1 << " like to do, hit (Enter: H) or stand (Enter: S)?" << endl; // CHECK IF H OR S
 				cin >> playerChoice;
 
 				if (playerChoice == 'H')
