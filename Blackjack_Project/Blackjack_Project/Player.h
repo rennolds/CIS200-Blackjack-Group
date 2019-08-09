@@ -6,11 +6,14 @@
 
 using namespace std;
 
-class Player 
+class Player
 {
 private:
 	bool busted;
 	int money;
+
+
+protected:
 	int bet;
 	Hand playerHand;
 
@@ -34,20 +37,20 @@ public:
 		bet = 0;
 	}
 
-	void setBet(int num)
+	virtual void setBet(int num)
 	{
 		bet = num;
 	}
 
 	void payOut()
 	{
-		money += bet;
+		money += bet * 2;
 		bet = 0;
 	}
 
 	void loseBet()
 	{
-		money -= bet;
+		money -= bet * 2;
 		bet = 0;
 	}
 

@@ -1,19 +1,20 @@
 #pragma once
-
 #include<vector>
-#include"Player.h"
+//#include"Player.h"
 #include"deck.h"
+#include "ComputerPlayer.h"
 
 
 using namespace std;
 
-class Blackjack 
+class Blackjack
 {
 
 private:
 	vector<Player> players;
-	Player computerPlayer;
 	Deck gameDeck;
+	ComputerPlayer singleComputerPlayer;
+	ComputerPlayer dealer;
 	char keepPlaying;
 
 public:
@@ -25,18 +26,19 @@ public:
 			Player newPlayer;
 			players.push_back(newPlayer);
 		}
-		Player computerPlayer;
 		Deck gameDeck;
 		keepPlaying = 'Y';
 	}
 
 	void play()
 	{
-		do 
+		do
 		{
 			round();
-			cout << "Press N to quit the game, press anything else to go to the next round." << endl;
-			cin >> keepPlaying; // CHECK IF ITS A CHARACTER
+
+			cout << "Press N to quit the game, press anything to go to the next round." << endl;
+			cin >> keepPlaying; // CHECK IF CHARACTER
+			keepPlaying = toupper(keepPlaying);
 
 		} while (!(keepPlaying == 'N'));
 	}
@@ -48,9 +50,10 @@ public:
 		{
 			cout << "How much would you player " << index + 1 << " like to bet?" << endl;
 			cin >> bet; // CHECK IF ITS A NUMBER
-			
+
 			players.at(index).setBet(bet);
 		}
+		singleComputerPlayer.setBet();
 
 		for (int outerIndex = 0; outerIndex < 2; ++outerIndex) // write void dealPlayers()
 		{
@@ -58,7 +61,11 @@ public:
 			{
 				players.at(innerIndex).dealPlayerCard(gameDeck);
 			}
+			singleComputerPlayer.dealPlayerCard(gameDeck);
+			dealer.dealPlayerCard(gameDeck);
 		}
+
+		int dealerFaceUpCard = dealer.dealerFaceUpCard();
 
 		for (int index = 0; index < players.size(); ++index) // write showPlayerHands()
 		{
@@ -67,13 +74,13 @@ public:
 		// show the computers hand
 		// show the dealers first card
 
-		
+
 		for (int index = 0; index < players.size(); ++index) // void playerTurns()
 		{
 			cout << "Player " << index + 1 << "'s turn." << endl;
-			char playerChoice; 
+			char playerChoice;
 
-			do 
+			do
 			{
 				cout << "What would player " << index + 1 << " like to do, hit (Enter: H) or stand (Enter: S)?" << endl; // CHECK IF H OR S
 				cin >> playerChoice;
@@ -92,19 +99,44 @@ public:
 			} while (playerChoice == 'H' && !players.at(index).hasPlayerBusted());
 		}
 
-		// computer takes action
-		// dealer takes action
+		cout << "Computer player will now decide what to do: " << endl;
 
+		// computer player decides to hit or stand
+		do {
+			if (singleComputerPlayer.determineHitOrStand(dealerFaceUpCard)) {
+				singleComputerPlayer.dealPlayerCard(gameDeck);
+			}
+		} while (singleComputerPlayer.determineHitOrStand(dealerFaceUpCard));
+
+		// dealer decides to hit or stand
+		do {
+			if (dealer.getPlayerHandValue() < 17) {
+				dealer.dealPlayerCard(gameDeck);
+			}
+
+		} while (dealer.getPlayerHandValue() < 17);
+
+		// determines whether to pay out or subtract winnings for players
 		for (int index = 0; index < players.size(); ++index)
 		{
-			// get dealer hand value
-			// get player hand value
-			// if player value > dealer, increase their money by bet
-			// else if player value < dealer, decrease their money by bet
-			// else, do nothing
+
+			if (players.at(index).getPlayerHandValue() > dealer.getPlayerHandValue()) {
+				players.at(index).payOut();
+			}
+			else if (players.at(index).getPlayerHandValue() < dealer.getPlayerHandValue()) {
+				players.at(index).loseBet();
+			}
+
 		}
-		
-		// payout accordingly. increase by 1 or decrease by 1, or do nothing
+
+		// determines whether to pay out or subtract winnings for computer player
+		if (singleComputerPlayer.getPlayerHandValue() > dealer.getPlayerHandValue()) {
+			singleComputerPlayer.payOut();
+		}
+		else if (singleComputerPlayer.getPlayerHandValue() > dealer.getPlayerHandValue()) {
+			singleComputerPlayer.loseBet();
+		}
+
 
 		for (int index = 0; index < players.size(); ++index)
 		{
@@ -114,14 +146,14 @@ public:
 		}
 
 		// show computer total 
-	
+
 		for (int index = 0; index < players.size(); ++index) // write void clearPlayerHands()
 		{
 			players.at(index).clearHand();
 		}
+		singleComputerPlayer.clearHand();
+		dealer.clearHand();
 	}
-
-	
 
 	int getNumberOfPlayersLeft()
 	{

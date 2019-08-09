@@ -120,6 +120,7 @@
   <ItemGroup>
     <ClInclude Include="Blackjack.h" />
     <ClInclude Include="card.h" />
+    <ClInclude Include="ComputerPlayer.h" />
     <ClInclude Include="deck.h" />
     <ClInclude Include="hand.h" />
     <ClInclude Include="Player.h" />
