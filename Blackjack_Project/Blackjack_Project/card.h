@@ -17,7 +17,7 @@ private:
 	char rank;	//card number
 
 public:
-	Card() 
+	Card()
 	{
 		suit = 'S';
 		rank = 'R';
@@ -28,7 +28,7 @@ public:
 		rank = r;
 
 	}
-		
+
 	void setSuit(char s)
 	{
 		suit = s;

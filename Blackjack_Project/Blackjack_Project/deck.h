@@ -20,7 +20,7 @@ private:
 
 public:
 	Deck()
-	{	
+	{
 		numberOfDecks = 6;
 		deckBuilder(numberOfDecks);
 		shuffleDeck();
@@ -96,4 +96,4 @@ public:
 		return lastCardInDeck.cardInfo();
 	}
 
-}; 
+};

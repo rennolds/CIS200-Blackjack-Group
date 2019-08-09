@@ -44,8 +44,8 @@ public:
 	{
 		Card card = Card();
 
-		hand[0] = card;
-		hand[1] = card;
+		//hand[0] = card;
+		//hand[1] = card;
 
 		setCardValues();
 	}
@@ -77,16 +77,16 @@ public:
 
 			// use rank to determine card's value
 			handValue += cardValues.find(rank)->second;
-		} 
+		}
 
 		// Ace will be 1 or 11
-		if (hasAce) 
+		if (hasAce)
 		{
-			if (handValue + 10 <= 21) 
+			if (handValue + 10 <= 21)
 			{
 				handValue += 10;
-			} 
-		} 
+			}
+		}
 
 		return handValue;
 	}
@@ -182,6 +182,14 @@ public:
 		return hand.size();
 	}
 
+	int getDealerFaceCard() {
+
+		char rank = ' ';
+		rank = hand.at(0).getRank();
+
+		return cardValues.find(rank)->second;
+	}
+
 	/*
 	//gives 2 cards to dealer and player
 	void initializeHands(Deck &deck, Player &player, Dealer &dealer)
@@ -189,8 +197,8 @@ public:
 		// create a hand for the dealer & user
 		for (int count = 0; count < 2; count++)
 		{
-			dealer.hand + deck;		
-			user.hand + deck;		
+			dealer.hand + deck;
+			user.hand + deck;
 	}
 	*/
 };
