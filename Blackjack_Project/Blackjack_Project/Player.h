@@ -11,30 +11,22 @@ class Player
 private:
 	bool busted;
 	int money;
-
+	bool eliminated;
+	bool didPlayerLose;
+	string playerName;
 
 protected:
 	int bet;
 	Hand playerHand;
 
 public:
-	Player()
+	Player(string name)
 	{
 		busted = false;
 		money = 100;
 		bet = 0;
-	}
-
-	bool checkBusted()
-	{
-		return busted;
-	}
-
-	void bustPlayer()
-	{
-		busted = true;
-		money -= bet;
-		bet = 0;
+		eliminated = false;
+		playerName = name;
 	}
 
 	virtual void setBet(int num)
@@ -44,14 +36,12 @@ public:
 
 	void payOut()
 	{
-		money += bet * 2;
-		bet = 0;
+		money += bet;
 	}
 
 	void loseBet()
 	{
-		money -= bet * 2;
-		bet = 0;
+		money -= bet;
 	}
 
 	void dealPlayerCard(Deck &deck)
@@ -76,6 +66,53 @@ public:
 		{
 			playerHand.removeCard();
 		}
+	}
+
+	string getPlayerHandInfo()
+	{
+		string playerHandInfo;
+		playerHandInfo = playerHand.handInfo();
+		return playerHandInfo;
+	}
+
+	int getBet()
+	{
+		return bet;
+	}
+
+	int getMoney()
+	{
+		return money;
+	}
+
+	bool isPlayerEliminated()
+	{
+		return eliminated;
+	}
+
+	void setPlayerToEliminated()
+	{
+		eliminated = true;
+	}
+
+	void playerLost()
+	{
+		didPlayerLose = true;
+	}
+
+	void playerWon()
+	{
+		didPlayerLose = false;
+	}
+
+	bool getDidPlayerLose()
+	{
+		return didPlayerLose;
+	}
+
+	string getName()
+	{
+		return playerName;
 	}
 
 };

@@ -145,13 +145,15 @@ public:
 		return busted;
 	}
 
+	/*
 	friend ostream& operator<<(ostream& os, const Hand& hand)
 	{
-		for (int index = 0; index < hand.getSize(); ++index)
-			os << hand.at(index) << " ";
+		os << hand[0] << " ";
 
 		return os;
 	}
+	*/
+	
 
 	string handInfo() const
 	{

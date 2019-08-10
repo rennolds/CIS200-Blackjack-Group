@@ -13,8 +13,9 @@ int main()
 	exampleHand.addCard(exampleDeck);
 	exampleHand.addCard(exampleDeck);
 
-	cout << exampleHand << endl;
-	cout << exampleHand.getHandSize() << endl;
+	string handInfo;
+	handInfo = exampleHand.handInfo();
+	cout << handInfo << endl;
 
 	exampleHand.removeCard();
 	exampleHand.removeCard();
@@ -43,7 +44,15 @@ int main()
 			throw exception("Invalid number of players.");
 		}
 
-		Blackjack newBlackjackGame(numberOfPlayers);
+		string playerName;
+		vector <string> playerNames;
+		for (int index = 0; index < numberOfPlayers; ++index)
+		{
+			cout << "Provide a name for player " << index + 1 << ": " << endl;
+			cin >> playerName;
+			playerNames.push_back(playerName);
+		}
+		Blackjack newBlackjackGame(numberOfPlayers, playerNames);
 		newBlackjackGame.play();
 	}
 	catch (exception &excpt) {

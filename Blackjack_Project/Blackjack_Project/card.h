@@ -47,14 +47,14 @@ public:
 	}
 
 	//prints cards suit and rank as SR, (SuitRank)
-	std::string cardInfo() const
+	string cardInfo() const
 	{
 		char card[2];
 
 		card[0] = getRank();
 		card[1] = getSuit();
 
-		std::string info(card, 2);
+		string info(card, 2);
 
 		return info;
 	}
