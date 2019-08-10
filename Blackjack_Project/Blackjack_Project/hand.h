@@ -112,6 +112,7 @@ public:
 
 		return sameRank;
 	}
+
 	bool card2IsAce() const
 	{
 		bool isItAce = false;
@@ -123,11 +124,9 @@ public:
 		return isItAce;
 	}
 
-	void removeCard() // used to be of type Card 
+	void removeCard()
 	{
-		// Card card;
 		hand.pop_back();
-		// return card;
 	}
 
 	bool hasBusted() const
@@ -146,9 +145,17 @@ public:
 		return busted;
 	}
 
-	std::string handInfo() const
+	friend ostream& operator<<(ostream& os, const Hand& hand)
 	{
-		std::string outString = "[";
+		for (int index = 0; index < hand.getSize(); ++index)
+			os << hand.at(index) << " ";
+
+		return os;
+	}
+
+	string handInfo() const
+	{
+		string outString = "[";
 		int handSize_less1 = hand.size() - 1;
 		int handSize = hand.size();
 
@@ -165,9 +172,9 @@ public:
 
 		return outString;
 	}
-	std::string dealerHandInfo() const
+	string dealerHandInfo() const
 	{
-		std::string outString = "[XX, ";
+		string outString = "[XX, ";
 
 		outString += hand[1].cardInfo();
 

@@ -53,6 +53,7 @@ public:
 
 			players.at(index).setBet(bet);
 		}
+
 		singleComputerPlayer.setBet();
 
 		for (int outerIndex = 0; outerIndex < 2; ++outerIndex) // write void dealPlayers()

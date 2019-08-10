@@ -13,6 +13,7 @@ int main()
 	exampleHand.addCard(exampleDeck);
 	exampleHand.addCard(exampleDeck);
 
+	cout << exampleHand << endl;
 	cout << exampleHand.getHandSize() << endl;
 
 	exampleHand.removeCard();
