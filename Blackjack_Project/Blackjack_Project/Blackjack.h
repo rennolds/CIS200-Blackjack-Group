@@ -5,6 +5,7 @@
 #include "ComputerPlayer.h"
 
 
+
 using namespace std;
 
 class Blackjack
@@ -63,9 +64,12 @@ public:
 			cout << "How much would " << players.at(index).getName() << " like to bet?" << endl;
 			cin >> bet; // CHECK IF ITS A NUMBER
 
+			while (bet > players.at(index).getMoney() || bet < 0) {
+				cout << players.at(index).getName() << " has $" << players.at(index).getMoney() << ". Please make a bet that is within their ability: ";
+				cin >> bet; 
+			}
 			players.at(index).setBet(bet);
 		}
-
 		singleComputerPlayer.setBet();
 	}
 
@@ -90,6 +94,7 @@ public:
 			cout << players.at(index).getName() << "'s hand: " << players.at(index).getPlayerHandInfo() << endl;
 		}
 		cout << "Computer Player hand: " << singleComputerPlayer.getPlayerHandInfo() << endl;
+		cout << "Dealer's face-up card: " << dealer.dealerFaceUpCard() << endl; 
 		// show the dealers first card
 	}
 
@@ -126,10 +131,17 @@ public:
 	{
 		for (int index = 0; index < players.size(); ++index)
 		{
-			if (players.at(index).getPlayerHandValue() <= dealer.getPlayerHandValue() || players.at(index).hasPlayerBusted())
+			if (dealer.hasPlayerBusted() && !players.at(index).hasPlayerBusted()) {
+				players.at(index).payOut();
+				players.at(index).playerWon();
+			}
+			else if (players.at(index).getPlayerHandValue() <= dealer.getPlayerHandValue() || players.at(index).hasPlayerBusted())
 			{
 				players.at(index).loseBet();
 				players.at(index).playerLost();
+			}
+			else if (players.at(index).getPlayerHandValue() == dealer.getPlayerHandValue()) {
+
 			}
 			else
 			{
@@ -138,14 +150,26 @@ public:
 			}
 		}
 
-		if (singleComputerPlayer.getPlayerHandValue() > dealer.getPlayerHandValue())
-		{
+		if (dealer.hasPlayerBusted() && !singleComputerPlayer.hasPlayerBusted()) {
 			singleComputerPlayer.payOut();
+			singleComputerPlayer.playerWon();
 		}
-		else if (singleComputerPlayer.getPlayerHandValue() > dealer.getPlayerHandValue())
+
+		else if (singleComputerPlayer.getPlayerHandValue() < dealer.getPlayerHandValue() || singleComputerPlayer.hasPlayerBusted())
 		{
 			singleComputerPlayer.loseBet();
+			singleComputerPlayer.playerLost();
 		}
+		else if (singleComputerPlayer.getPlayerHandValue() == dealer.getPlayerHandValue()) {
+
+		}
+
+		else if (singleComputerPlayer.getPlayerHandValue() > dealer.getPlayerHandValue())
+		{
+			singleComputerPlayer.payOut();
+			singleComputerPlayer.playerWon();
+		}
+		
 	}
 
 	void showResults()
@@ -162,6 +186,10 @@ public:
 			else if (players.at(index).getDidPlayerLose())
 			{
 				cout << players.at(index).getName() << " bet $" << players.at(index).getBet() << " and lost." << endl;
+				cout << "New total: $" << players.at(index).getMoney() << "." << endl;
+			}
+			else if (players.at(index).getPlayerHandValue() == dealer.getPlayerHandValue()) {
+				cout << players.at(index).getName() << " bet $" << players.at(index).getBet() << " and broke even." << endl;
 				cout << "New total: $" << players.at(index).getMoney() << "." << endl;
 			}
 			else
@@ -181,6 +209,10 @@ public:
 		else if (singleComputerPlayer.getDidPlayerLose())
 		{
 			cout << "Computer player bet $" << singleComputerPlayer.getBet() << " and lost." << endl;
+			cout << "New total: $" << singleComputerPlayer.getMoney() << "." << endl;
+		}
+		else if (singleComputerPlayer.getPlayerHandValue() == dealer.getPlayerHandValue()) {
+			cout << "Computer player bet $" << singleComputerPlayer.getBet() << " and broke even." << endl;
 			cout << "New total: $" << singleComputerPlayer.getMoney() << "." << endl;
 		}
 		else
@@ -212,7 +244,7 @@ public:
 			if (singleComputerPlayer.determineHitOrStand(dealerFaceUpCard))
 			{
 				singleComputerPlayer.dealPlayerCard(gameDeck);
-				cout << singleComputerPlayer.getPlayerHandInfo() << endl;
+				cout << "Computer's hand: " << singleComputerPlayer.getPlayerHandInfo() << endl;
 			}
 		} while (singleComputerPlayer.determineHitOrStand(dealerFaceUpCard));
 
@@ -222,10 +254,17 @@ public:
 			if (dealer.getPlayerHandValue() < 17)
 			{
 				dealer.dealPlayerCard(gameDeck);
-				cout << dealer.getPlayerHandInfo() << endl;
 			}
 
+			
 		} while (dealer.getPlayerHandValue() < 17);
+
+		cout << "Dealer's hand: " << dealer.getPlayerHandInfo() << endl;
+
+		if (dealer.hasPlayerBusted()) {
+			cout << "The dealer has busted!" << endl;
+		}
+		cout << endl; 
 	}
 
 	void removeEliminatedPlayers()

@@ -2,6 +2,7 @@
 
 #pragma once
 #include <vector>
+#include <stack>
 #include <map>
 #include <string>
 #include <iostream>
@@ -30,6 +31,7 @@ public:
 		numberOfDecks = deckNumber;
 		deckBuilder(deckNumber);
 		shuffleDeck();
+
 	}
 
 	void deckBuilder(int decks)

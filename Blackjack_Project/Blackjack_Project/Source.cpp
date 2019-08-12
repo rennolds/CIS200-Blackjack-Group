@@ -1,12 +1,15 @@
 #include<iostream>
 #include<stack>
 #include<string>
+#include<cstdlib>
+#include<ctime>
 #include"Blackjack.h"
 
 using namespace std;
 
 int main()
 {
+	srand(time(0)); 
 	Deck exampleDeck;
 	Hand exampleHand;
 	exampleHand.addCard(exampleDeck);
