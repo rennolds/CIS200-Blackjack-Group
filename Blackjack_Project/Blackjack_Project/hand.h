@@ -25,7 +25,7 @@ private:
 		cardValues['7'] = 7;
 		cardValues['8'] = 8;
 		cardValues['9'] = 9;
-		cardValues['0'] = 10;
+		cardValues['T'] = 10; //0 that use to represent ten to 'T'
 		cardValues['J'] = 10;
 		cardValues['Q'] = 10;
 		cardValues['K'] = 10;

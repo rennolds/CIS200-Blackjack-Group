@@ -64,11 +64,33 @@ public:
 			cout << "How much would " << players.at(index).getName() << " like to bet?" << endl;
 			cin >> bet; // CHECK IF ITS A NUMBER
 
-			while (bet > players.at(index).getMoney() || bet < 0) {
+			// got from https://www.hackerearth.com/practice/notes/validating-user-input-in-c/
+			
+				if (cin.fail())
+				{
+					cin.clear();
+					cin.ignore(numeric_limits<streamsize>::max(), '\n');
+					cout << "You have entered wrong input, please enter a number for your bet:" << endl;
+					cin >> bet;
+				}
+
+				else if (!cin.fail())
+				{
+					while (bet > players.at(index).getMoney() || bet < 0) 
+					{
+						cout << players.at(index).getName() << " has $" << players.at(index).getMoney() << ". Please make a bet that is within their ability: ";
+						cin >> bet;
+					}
+					players.at(index).setBet(bet);
+				}
+			
+
+			/*while (bet > players.at(index).getMoney() || bet < 0) {
 				cout << players.at(index).getName() << " has $" << players.at(index).getMoney() << ". Please make a bet that is within their ability: ";
 				cin >> bet; 
 			}
 			players.at(index).setBet(bet);
+			*/
 		}
 		singleComputerPlayer.setBet();
 	}
@@ -109,21 +131,40 @@ public:
 
 			do
 			{
-				cout << "What would " << players.at(index).getName() << " like to do, hit (Enter: H) or stand (Enter: S)?" << endl; // CHECK IF H OR S
-				cin >> playerChoice;
+					cout << "What would " << players.at(index).getName() << " like to do, hit (Enter: H) or stand (Enter: S)?" << endl; // CHECK IF H OR S
+					cin >> playerChoice;
 
-				if (playerChoice == 'H')
-				{
-					players.at(index).dealPlayerCard(gameDeck);
-					cout << players.at(index).getPlayerHandInfo() << endl;
-				}
+					playerChoice = toupper(playerChoice);
 
-				if (players.at(index).hasPlayerBusted())
-				{
-					cout << players.at(index).getName() << " has busted!" << endl;
-				}
+					if (playerChoice != 'H' && playerChoice != 'S')
+					{
+						cin.clear();
+						cin.ignore(numeric_limits<streamsize>::max(), '\n');
+						cout << "You have entered wrong input, please enter hit (Enter: H) or stand (Enter: S)" << endl;
+						cin >> playerChoice;
+						playerChoice = toupper(playerChoice);
+					}
 
+						if (playerChoice == 'H' || playerChoice == 'h')
+						{
+							players.at(index).dealPlayerCard(gameDeck);
+							cout << players.at(index).getPlayerHandInfo() << endl;
+						}
+
+						if (playerChoice == 'S' || playerChoice == 's')
+						{
+							cout << "Player" << players.at(index).getName() << "has chosen to stand!";
+							
+						}
+
+						if (players.at(index).hasPlayerBusted())
+						{
+							cout << players.at(index).getName() << " has busted!" << endl;
+						}
+					
 			} while (playerChoice == 'H' && !players.at(index).hasPlayerBusted());
+			
+
 		}
 	}
 
