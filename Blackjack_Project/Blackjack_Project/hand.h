@@ -176,11 +176,11 @@ public:
 	}
 	string dealerHandInfo() const
 	{
-		string outString = "[XX, ";
+		string outString = hand[0].cardInfo(); 
 
-		outString += hand[1].cardInfo();
+		//outString += hand[1].cardInfo();
 
-		outString += "]\n\n";
+		//outString += "]\n\n";
 
 		return outString;
 	}

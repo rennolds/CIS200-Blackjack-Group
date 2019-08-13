@@ -70,4 +70,10 @@ public:
 	{
 		return playerHand.getDealerFaceCard();
 	}
+
+	string getPlayerHandInfo() {
+
+		string playerHandInfo = playerHand.dealerHandInfo(); 
+		return playerHandInfo; 
+	}
 };

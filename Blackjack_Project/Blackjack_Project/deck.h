@@ -45,7 +45,7 @@ public:
 		int rank = 0;
 
 		const char SUITS[SUITS_MAX] = { 'S', 'D', 'C', 'H' };
-		const char RANKS[RANKS_MAX] = { '2', '3', '4', '5', '6', '7', '8', '9', '0', 'J', 'Q', 'K', 'A' };
+		const char RANKS[RANKS_MAX] = { '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A' };
 
 
 		for (int deckCount = 0; deckCount < decks; deckCount++)

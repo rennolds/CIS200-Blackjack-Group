@@ -68,7 +68,7 @@ public:
 		}
 	}
 
-	string getPlayerHandInfo()
+	virtual string getPlayerHandInfo()
 	{
 		string playerHandInfo;
 		playerHandInfo = playerHand.handInfo();

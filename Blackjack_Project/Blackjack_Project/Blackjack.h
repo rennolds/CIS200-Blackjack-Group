@@ -76,7 +76,7 @@ public:
 
 				else if (!cin.fail())
 				{
-					while (bet > players.at(index).getMoney() || bet < 0) 
+					while (bet > players.at(index).getMoney() || bet <= 0) 
 					{
 						cout << players.at(index).getName() << " has $" << players.at(index).getMoney() << ". Please make a bet that is within their ability: ";
 						cin >> bet;
@@ -116,7 +116,7 @@ public:
 			cout << players.at(index).getName() << "'s hand: " << players.at(index).getPlayerHandInfo() << endl;
 		}
 		cout << "Computer Player hand: " << singleComputerPlayer.getPlayerHandInfo() << endl;
-		cout << "Dealer's face-up card: " << dealer.dealerFaceUpCard() << endl; 
+		cout << "Dealer's face-up card: " << dealer.getPlayerHandInfo() << endl; 
 		// show the dealers first card
 	}
 
