@@ -18,7 +18,6 @@ private:
 	int numberOfDecks;
 	Card lastCardInDeck;
 
-
 public:
 	Deck()
 	{
@@ -62,19 +61,18 @@ public:
 	}
 	void shuffleDeck()
 	{
-		std::random_shuffle(deck.begin(), deck.end());
+		random_shuffle(deck.begin(), deck.end());
 
 	}
 	Card dealCard()
 	{
-		if (deck.empty() == false)
+		if (deck.size() >= 30)
 		{
 			lastCardInDeck = deck.back();
 			deck.pop_back();
 		}
 		else
 		{
-			std::cout << "Deck is low. Reshuffling!";
 			resetDeck();
 			lastCardInDeck = deck.back();
 			deck.pop_back();

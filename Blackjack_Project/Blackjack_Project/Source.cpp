@@ -82,8 +82,6 @@ int main()
 		cout << excpt.what() << endl;
 	}
 
-	
-
 	system("pause");
 	return 0;
 }
