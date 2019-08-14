@@ -41,18 +41,11 @@ public:
 			cout << "Round: " << numberOfRounds << endl;
 			round();
 
-			if (players.size() != 0)
-			{
-				cout << "Press N to quit the game, press anything to go to the next round." << endl;
-				cin >> keepPlaying; // CHECK IF CHARACTER
-				keepPlaying = toupper(keepPlaying);
-			}
-			else
-			{
-				cout << "No human players left, ending the game." << endl;
-				keepPlaying = 'N';
-			}
-
+			
+			cout << "Press N to quit the game, press anything to go to the next round." << endl;
+			cin >> keepPlaying; // CHECK IF CHARACTER
+			keepPlaying = toupper(keepPlaying);
+		
 		} while (!(keepPlaying == 'N'));
 	}
 
@@ -83,14 +76,6 @@ public:
 					}
 					players.at(index).setBet(bet);
 				}
-			
-
-			/*while (bet > players.at(index).getMoney() || bet < 0) {
-				cout << players.at(index).getName() << " has $" << players.at(index).getMoney() << ". Please make a bet that is within their ability: ";
-				cin >> bet; 
-			}
-			players.at(index).setBet(bet);
-			*/
 		}
 		singleComputerPlayer.setBet();
 	}
@@ -153,7 +138,7 @@ public:
 
 						if (playerChoice == 'S' || playerChoice == 's')
 						{
-							cout << "Player" << players.at(index).getName() << "has chosen to stand!";
+							cout << "Player " << players.at(index).getName() << " has chosen to stand!" << endl;
 							
 						}
 
@@ -324,11 +309,15 @@ public:
 	{
 		playerBets(); // let players bet, computer bets 1 automatically
 		dealCards(); // deal cards to players, computer, and dealer
-		showHands(); // show all the cards dealt (DOESN'T SHOW DEALER YET
+		showHands(); // show all the cards dealt (DOESN'T SHOW DEALER YET)
 		playerTurns(); // lets players take action
+		cout << endl;
 		dealerAndComputerAction(); // computes dealer and computer action
+		cout << endl;
 		payout(); // pays out players/computer
+		cout << endl;
 		showResults(); // shows results of the round
+		cout << endl;
 		removeEliminatedPlayers(); // removes any players that went below 0 
 		clearHands(); // clears hands of players 
 	}

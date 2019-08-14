@@ -198,16 +198,4 @@ public:
 
 		return cardValues.find(rank)->second;
 	}
-
-	/*
-	//gives 2 cards to dealer and player
-	void initializeHands(Deck &deck, Player &player, Dealer &dealer)
-	{
-		// create a hand for the dealer & user
-		for (int count = 0; count < 2; count++)
-		{
-			dealer.hand + deck;
-			user.hand + deck;
-	}
-	*/
 };

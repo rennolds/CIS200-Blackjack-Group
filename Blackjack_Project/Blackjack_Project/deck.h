@@ -8,6 +8,7 @@
 #include <iostream>
 #include <algorithm>
 #include "card.h"
+#include<stack>
 
 using namespace std;
 
@@ -91,7 +92,7 @@ public:
 		shuffleDeck();
 	}
 
-	std::string lastCardDealtOut() const
+	string lastCardDealtOut() const
 	{
 		return lastCardInDeck.cardInfo();
 	}
