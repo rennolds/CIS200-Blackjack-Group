@@ -35,9 +35,8 @@ public:
 			cout << "Round: " << numberOfRounds << endl;
 			round();
 
-			
-			cout << "Press N to quit the game, press anything to go to the next round." << endl;
-			cin >> keepPlaying; // CHECK IF CHARACTER
+			cout << "Press N to quit the game, press anyother single key to go to the next round." << endl;
+			cin >> keepPlaying;
 			keepPlaying = toupper(keepPlaying);
 		
 		} while (!(keepPlaying == 'N'));
@@ -46,12 +45,12 @@ public:
 	void playerBets()
 	{
 		int bet;
-		for (int index = 0; index < players.size(); ++index) // write void playerBets()
+		for (int index = 0; index < players.size(); ++index) 
 		{
 			cout << "How much would " << players.at(index).getName() << " like to bet?" << endl;
-			cin >> bet; // CHECK IF ITS A NUMBER
+			cin >> bet;
 
-			// got from https://www.hackerearth.com/practice/notes/validating-user-input-in-c/
+			// based off of https://www.hackerearth.com/practice/notes/validating-user-input-in-c/
 			
 				if (cin.fail())
 				{
@@ -59,6 +58,7 @@ public:
 					cin.ignore(numeric_limits<streamsize>::max(), '\n');
 					cout << "You have entered wrong input, please enter a number for your bet:" << endl;
 					cin >> bet;
+					players.at(index).setBet(bet);
 				}
 
 				else if (!cin.fail())
@@ -76,7 +76,7 @@ public:
 
 	void dealCards()
 	{
-		for (int outerIndex = 0; outerIndex < 2; ++outerIndex) // write void dealPlayers()
+		for (int outerIndex = 0; outerIndex < 2; ++outerIndex) 
 		{
 			for (int innerIndex = 0; innerIndex < players.size(); ++innerIndex)
 			{
@@ -90,28 +90,26 @@ public:
 
 	void showHands()
 	{
-		for (int index = 0; index < players.size(); ++index) // write showPlayerHands()
+		for (int index = 0; index < players.size(); ++index)
 		{
 			cout << players.at(index).getName() << "'s hand: " << players.at(index).getPlayerHandInfo() << endl;
 		}
 		cout << "Computer player's hand: " << singleComputerPlayer.getPlayerHandInfo() << endl;
 		cout << "Dealer's face-up card: " << dealer.getDealerHandInfo() << endl; 
-		// show the dealers first card
 	}
 
 	void playerTurns()
 	{
 
-		for (int index = 0; index < players.size(); ++index) // void playerTurns()
+		for (int index = 0; index < players.size(); ++index) 
 		{
 			cout << players.at(index).getName() << "'s turn." << endl;
-
 			char playerChoice;
 
 			do
 			{
-					cout << "What would " << players.at(index).getName() << " like to do, hit (Enter: H) or stand (Enter: S)?" << endl; // CHECK IF H OR S
-					cin >> playerChoice;
+					cout << "What would " << players.at(index).getName() << " like to do, hit (Enter: H) or stand (Enter: S)?" << endl;
+					cin >> playerChoice; 
 
 					playerChoice = toupper(playerChoice);
 
@@ -139,11 +137,8 @@ public:
 						if (players.at(index).hasPlayerBusted())
 						{
 							cout << players.at(index).getName() << " has busted!" << endl;
-						}
-					
+						}		
 			} while (playerChoice == 'H' && !players.at(index).hasPlayerBusted());
-			
-
 		}
 	}
 
@@ -151,19 +146,21 @@ public:
 	{
 		for (int index = 0; index < players.size(); ++index)
 		{
-			if (dealer.hasPlayerBusted() && !players.at(index).hasPlayerBusted()) {
+			if (dealer.hasPlayerBusted() && !players.at(index).hasPlayerBusted()) // dealer busts
+			{
 				players.at(index).payOut();
 				players.at(index).playerWon();
 			}
-			else if (players.at(index).getPlayerHandValue() <= dealer.getPlayerHandValue() || players.at(index).hasPlayerBusted())
+			else if (players.at(index).getPlayerHandValue() <= dealer.getPlayerHandValue() || players.at(index).hasPlayerBusted()) // player lost
 			{
 				players.at(index).loseBet();
 				players.at(index).playerLost();
 			}
-			else if (players.at(index).getPlayerHandValue() == dealer.getPlayerHandValue()) {
-
+			else if (players.at(index).getPlayerHandValue() == dealer.getPlayerHandValue()) 
+			{
+				// hands are equal, do nothing
 			}
-			else
+			else // player won 
 			{
 				players.at(index).payOut();
 				players.at(index).playerWon();
@@ -180,16 +177,15 @@ public:
 			singleComputerPlayer.loseBet();
 			singleComputerPlayer.playerLost();
 		}
-		else if (singleComputerPlayer.getPlayerHandValue() == dealer.getPlayerHandValue()) {
-
+		else if (singleComputerPlayer.getPlayerHandValue() == dealer.getPlayerHandValue()) 
+		{
+			// equal hands, do nothing
 		}
-
 		else if (singleComputerPlayer.getPlayerHandValue() > dealer.getPlayerHandValue())
 		{
 			singleComputerPlayer.payOut();
 			singleComputerPlayer.playerWon();
 		}
-		
 	}
 
 	void showResults()
@@ -255,13 +251,11 @@ public:
 	void dealerAndComputerAction()
 	{
 		int dealerFaceUpCard = dealer.dealerFaceUpCard();
-
 		cout << "Computer player will now decide what to do: " << endl;
 
-		while (singleComputerPlayer.determineHitOrStand(dealerFaceUpCard)) {
-
+		while (singleComputerPlayer.determineHitOrStand(dealerFaceUpCard)) 
+		{
 			singleComputerPlayer.dealPlayerCard(gameDeck);
-
 		}
 		cout << "\nComputer player's hand: " << singleComputerPlayer.getPlayerHandInfo() << endl;
 
@@ -296,23 +290,18 @@ public:
 
 	void round()
 	{
-		playerBets(); // let players bet, computer bets 1 automatically
-		dealCards(); // deal cards to players, computer, and dealer
-		showHands(); // show all the cards dealt (DOESN'T SHOW DEALER YET)
-		playerTurns(); // lets players take action
+		playerBets();
+		dealCards(); 
+		showHands(); 
+		playerTurns(); 
 		cout << endl;
-		dealerAndComputerAction(); // computes dealer and computer action
+		dealerAndComputerAction(); 
 		cout << endl;
-		payout(); // pays out players/computer
+		payout(); 
 		cout << endl;
-		showResults(); // shows results of the round
+		showResults(); 
 		cout << endl;
-		removeEliminatedPlayers(); // removes any players that went below 0 
-		clearHands(); // clears hands of players 
-	}
-
-	int getNumberOfPlayersLeft()
-	{
-		return players.size();
+		removeEliminatedPlayers();
+		clearHands(); 
 	}
 };

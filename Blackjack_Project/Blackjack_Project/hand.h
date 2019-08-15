@@ -1,13 +1,4 @@
-// hand for player that adds card, gets value and rank
-//has an ace or not, or has busted
-
 #pragma once
-//#include <vector>
-//#include <map>
-//#include <string>
-//#include <iostream>
-#include "card.h"
-#include "deck.h"
 
 class Hand
 {

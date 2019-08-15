@@ -1,5 +1,3 @@
-//deck class, 52 cards, shuffles, and deals
-
 #pragma once
 #include <vector>
 #include <stack>
@@ -30,7 +28,6 @@ public:
 		numberOfDecks = deckNumber;
 		deckBuilder(deckNumber);
 		shuffleDeck();
-
 	}
 
 	void deckBuilder(int decks)
@@ -62,7 +59,8 @@ public:
 	void shuffleDeck()
 	{
 		random_shuffle(deck.begin(), deck.end());
-		for (int index = 0; index < deck.size(); index++) {
+		for (int index = 0; index < deck.size(); index++) 
+		{
 			sixDeckStack.push(deck.at(index)); 
 		}
 	}
@@ -79,20 +77,16 @@ public:
 			lastCardInDeck = sixDeckStack.top();
 			sixDeckStack.pop();
 		}
-
 		return lastCardInDeck;
 	}
 	void resetDeck()
 	{
-		// clearing deck
 		while (!sixDeckStack.empty())
 			sixDeckStack.pop();
 
-		// creating deck
 		deckBuilder(numberOfDecks);
 		shuffleDeck();
 	}
-
 	string lastCardDealtOut() const
 	{
 		return lastCardInDeck.cardInfo();
