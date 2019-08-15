@@ -71,7 +71,7 @@ public:
 		return playerHand.getDealerFaceCard();
 	}
 
-	string getPlayerHandInfo() {
+	string getDealerHandInfo() {
 
 		string playerHandInfo = playerHand.dealerHandInfo(); 
 		return playerHandInfo; 

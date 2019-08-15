@@ -1,12 +1,6 @@
 #pragma once
-#include<vector>
-//#include"Player.h"
 #include"deck.h"
 #include "ComputerPlayer.h"
-
-
-
-using namespace std;
 
 class Blackjack
 {
@@ -100,8 +94,8 @@ public:
 		{
 			cout << players.at(index).getName() << "'s hand: " << players.at(index).getPlayerHandInfo() << endl;
 		}
-		cout << "Computer Player hand: " << singleComputerPlayer.getPlayerHandInfo() << endl;
-		cout << "Dealer's face-up card: " << dealer.getPlayerHandInfo() << endl; 
+		cout << "Computer player's hand: " << singleComputerPlayer.getPlayerHandInfo() << endl;
+		cout << "Dealer's face-up card: " << dealer.getDealerHandInfo() << endl; 
 		// show the dealers first card
 	}
 
@@ -264,17 +258,13 @@ public:
 
 		cout << "Computer player will now decide what to do: " << endl;
 
-		// computer player decides to hit or stand
-		do
-		{
-			if (singleComputerPlayer.determineHitOrStand(dealerFaceUpCard))
-			{
-				singleComputerPlayer.dealPlayerCard(gameDeck);
-				cout << "Computer's hand: " << singleComputerPlayer.getPlayerHandInfo() << endl;
-			}
-		} while (singleComputerPlayer.determineHitOrStand(dealerFaceUpCard));
+		while (singleComputerPlayer.determineHitOrStand(dealerFaceUpCard)) {
 
-		// dealer decides to hit or stand
+			singleComputerPlayer.dealPlayerCard(gameDeck);
+
+		}
+		cout << "\nComputer player's hand: " << singleComputerPlayer.getPlayerHandInfo() << endl;
+
 		do
 		{
 			if (dealer.getPlayerHandValue() < 17)
@@ -282,7 +272,6 @@ public:
 				dealer.dealPlayerCard(gameDeck);
 			}
 
-			
 		} while (dealer.getPlayerHandValue() < 17);
 
 		cout << "Dealer's hand: " << dealer.getPlayerHandInfo() << endl;

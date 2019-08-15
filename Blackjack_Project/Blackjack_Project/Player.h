@@ -1,10 +1,6 @@
 #pragma once
-
-#include<vector>
 #include"hand.h"
-#include"deck.h"
-
-using namespace std;
+//#include"deck.h"
 
 class Player
 {
@@ -68,7 +64,7 @@ public:
 		}
 	}
 
-	virtual string getPlayerHandInfo()
+    string getPlayerHandInfo()
 	{
 		string playerHandInfo;
 		playerHandInfo = playerHand.handInfo();

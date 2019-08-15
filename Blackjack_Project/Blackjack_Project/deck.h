@@ -4,13 +4,11 @@
 #include <vector>
 #include <stack>
 #include <map>
-#include <string>
 #include <iostream>
 #include <algorithm>
+#include <stack>
 #include "card.h"
-#include<stack>
 
-using namespace std;
 
 class Deck
 {
@@ -18,6 +16,7 @@ private:
 	vector<Card> deck;
 	int numberOfDecks;
 	Card lastCardInDeck;
+	stack<Card> sixDeckStack; 
 
 public:
 	Deck()
@@ -63,20 +62,22 @@ public:
 	void shuffleDeck()
 	{
 		random_shuffle(deck.begin(), deck.end());
-
+		for (int index = 0; index < deck.size(); index++) {
+			sixDeckStack.push(deck.at(index)); 
+		}
 	}
 	Card dealCard()
 	{
-		if (deck.size() >= 30)
+		if (sixDeckStack.size() >= 30)
 		{
-			lastCardInDeck = deck.back();
-			deck.pop_back();
+			lastCardInDeck = sixDeckStack.top();
+			sixDeckStack.pop(); 
 		}
 		else
 		{
 			resetDeck();
-			lastCardInDeck = deck.back();
-			deck.pop_back();
+			lastCardInDeck = sixDeckStack.top();
+			sixDeckStack.pop();
 		}
 
 		return lastCardInDeck;
@@ -84,8 +85,8 @@ public:
 	void resetDeck()
 	{
 		// clearing deck
-		while (!deck.empty())
-			deck.pop_back();
+		while (!sixDeckStack.empty())
+			sixDeckStack.pop();
 
 		// creating deck
 		deckBuilder(numberOfDecks);

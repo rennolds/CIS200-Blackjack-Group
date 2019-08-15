@@ -7,39 +7,9 @@
 
 using namespace std;
 
-
-
 int main()
 {
 	srand(time(0)); 
-	Deck exampleDeck;
-	Hand exampleHand;
-	exampleHand.addCard(exampleDeck);
-	exampleHand.addCard(exampleDeck);
-	exampleHand.addCard(exampleDeck);
-
-	string handInfo;
-	handInfo = exampleHand.handInfo();
-	cout << handInfo << endl;
-
-	exampleHand.removeCard();
-	exampleHand.removeCard();
-
-	cout << exampleHand.getHandSize() << endl;
-
-	/*int numberOfDecks = 6;
-	Deck multipleDecks(numberOfDecks);
-	Hand testHand(2);
-	testHand.addCard(multipleDecks);
-	testHand.addCard(multipleDecks);
-	testHand.getValue();
-	cout << testHand.dealerHandInfo() << endl;
-	Card testCard('S', '7');
-	cout << testCard.getSuit() << " " << testCard.getRank() << endl;
-	cout << testCard.cardInfo() << endl; */
-
-	/*  Beginning of Actual Main Program*/
-
 	int numberOfPlayers;
 
 	try {
