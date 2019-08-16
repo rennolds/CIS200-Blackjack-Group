@@ -14,15 +14,15 @@ private:
 		cardValues['7'] = 7;
 		cardValues['8'] = 8;
 		cardValues['9'] = 9;
-		cardValues['T'] = 10; //0 that use to represent ten to 'T'
+		cardValues['T'] = 10; 
 		cardValues['J'] = 10;
 		cardValues['Q'] = 10;
 		cardValues['K'] = 10;
 	}
 
 protected:
-	vector<Card> hand;					// hand of Cards
-	map <char, int> cardValues;	// holds card values
+	vector<Card> hand;		
+	map <char, int> cardValues;	
 
 public:
 	Hand()
@@ -32,13 +32,8 @@ public:
 	Hand(int num)
 	{
 		Card card = Card();
-
-		//hand[0] = card;
-		//hand[1] = card;
-
 		setCardValues();
 	}
-
 	void addCard(Deck &deck)
 	{
 		hand.push_back(deck.dealCard());
@@ -47,8 +42,7 @@ public:
 	{
 		hand.push_back(card);
 	}
-
-	int getValue() const //handles ace card too
+	int getValue() const 
 	{
 		int handValue = 0;
 		char rank = ' ';
@@ -79,7 +73,7 @@ public:
 
 		return handValue;
 	}
-	int getSize() const //of hand
+	int getSize() const
 	{
 		return hand.size();
 	}
@@ -101,7 +95,7 @@ public:
 
 		return sameRank;
 	}
-
+	
 	bool card2IsAce() const
 	{
 		bool isItAce = false;
@@ -134,16 +128,6 @@ public:
 		return busted;
 	}
 
-	/*
-	friend ostream& operator<<(ostream& os, const Hand& hand)
-	{
-		os << hand[0] << " ";
-
-		return os;
-	}
-	*/
-	
-
 	string handInfo() const
 	{
 		string outString = "[";
@@ -166,14 +150,8 @@ public:
 	string dealerHandInfo() const
 	{
 		string outString = hand[0].cardInfo(); 
-
-		//outString += hand[1].cardInfo();
-
-		//outString += "]\n\n";
-
 		return outString;
 	}
-
 
 	int getHandSize()
 	{
